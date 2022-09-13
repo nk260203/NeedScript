@@ -123,3 +123,5 @@ menu.toggle(veiculo_tab, "Trancar portas", { "" }, "Tranca as portas do seu atua
     end
 
 end)
+
+menu.divider(menu.my_root(), "v1.0.0")
