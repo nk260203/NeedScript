@@ -55,20 +55,11 @@ local tipodeplaca
 local platetype
 menu.action(veiculo_tab, "Clonar veículo", {"clone"}, "Clona seu atual ou último veículo", function()
 
-    local vehicle = entities.get_user_vehicle_as_handle()
-	local my_ped = PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(players.user())
-	local ped = PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(pid)
-	local player_veh = PED.GET_VEHICLE_PED_IS_USING(ped)
-	local position = ENTITY.GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS(my_ped, 0.0, 6.5, 0.5)
-	local heading = ENTITY.GET_ENTITY_HEADING(my_ped)
+	foot_drive_state = menu.get_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"))
+	veh_drive_state = menu.get_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"))
 	
-	saveVehicleJson(vehicle)
-	
-	local file = io.open( VEHICLE_DIR .. "vehiclecloneneedscript.json", "r")
-	local saveData = json.decode(file:read("*a"))
-	
-	vehicle = entities.create_vehicle(saveData.Model, position, heading)
-	vehiclelib.ApplyToVehicle(vehicle, saveData)
+	menu.trigger_commands("savevehicle needscriptclone")
+	menu.trigger_commands("vehicleneedscriptclone")
 	
 	if platetype then
 		VEHICLE.SET_VEHICLE_NUMBER_PLATE_TEXT(vehicle, randomString(8))
@@ -76,11 +67,15 @@ menu.action(veiculo_tab, "Clonar veículo", {"clone"}, "Clona seu atual ou últi
 	
 	if not PED.IS_PED_IN_VEHICLE(ped, player_veh, false) then 
 		if dirigirveiculoape then
+			menu.set_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"), true)
 			PED.SET_PED_INTO_VEHICLE(my_ped, vehicle, -1)
+			menu.set_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"), foot_drive_state)
 		end
 	else 
 		if dirigirveiculoemveiculo then
+			menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), true)
 			PED.SET_PED_INTO_VEHICLE(my_ped, vehicle, -1)
+			menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), veh_drive_state)
 		end
 	end
 	file:close()
