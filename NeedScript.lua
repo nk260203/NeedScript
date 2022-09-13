@@ -118,3 +118,15 @@ menu.toggle(clonagem_tab, "Placa aleatória", { "" }, "Se ativar isso seu carro 
     end
 	
 end)
+
+menu.toggle(veiculo_tab, "Trancar portas", { "" }, "Tranca as portas do seu atual ou último carro usado", function(on)
+
+	local vehicle = entities.get_user_vehicle_as_handle()
+
+    if on then
+        VEHICLE.SET_VEHICLE_DOORS_LOCKED(vehicle, 3)
+    else
+        VEHICLE.SET_VEHICLE_DOORS_LOCKED(vehicle, 1)
+    end
+
+end)
