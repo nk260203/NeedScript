@@ -1,3 +1,4 @@
+-- MyScript
 util.keep_running()
 
 util.require_natives(1651208000)
@@ -23,7 +24,7 @@ run_auto_update({source_url=auto_update_source_url, script_relpath=SCRIPT_RELPAT
 local json = require("json")
 local vehiclelib = require("jackzvehiclelib")
 
-local veiculo_tab = menu.list(menu.my_root(), "Veículo2")
+local veiculo_tab = menu.list(menu.my_root(), "Veículo")
 
 local VEHICLE_DIR = filesystem.stand_dir() .. "Vehicles" .. package.config:sub(1,1)
 if not filesystem.exists(VEHICLE_DIR) then
