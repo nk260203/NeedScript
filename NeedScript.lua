@@ -6,6 +6,8 @@ util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
 
+menu.divider(menu.my_root(), "NeedScript v1.0.0")
+
 local auto_update_source_url = "https://raw.githubusercontent.com/nk260203/NeedScript/main/NeedScript.lua"
 local status, lib = pcall(require, "auto-updater")
 if not status then
@@ -123,5 +125,3 @@ menu.toggle(veiculo_tab, "Trancar portas", { "" }, "Tranca as portas do seu atua
     end
 
 end)
-
-menu.divider(menu.my_root(), "v1.0.0")
