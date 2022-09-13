@@ -59,7 +59,6 @@ menu.action(veiculo_tab, "Clonar veículo", {"clone"}, "Clona seu atual ou últi
 	veh_drive_state = menu.get_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"))
 	
 	menu.trigger_commands("savevehicle needscriptclone")
-	menu.trigger_commands("vehicleneedscriptclone")
 	
 	if platetype then
 		VEHICLE.SET_VEHICLE_NUMBER_PLATE_TEXT(vehicle, randomString(8))
@@ -68,17 +67,16 @@ menu.action(veiculo_tab, "Clonar veículo", {"clone"}, "Clona seu atual ou últi
 	if not PED.IS_PED_IN_VEHICLE(ped, player_veh, false) then 
 		if dirigirveiculoape then
 			menu.set_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"), true)
-			PED.SET_PED_INTO_VEHICLE(my_ped, vehicle, -1)
+			menu.trigger_commands("vehicleneedscriptclone")
 			menu.set_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"), foot_drive_state)
 		end
 	else 
 		if dirigirveiculoemveiculo then
 			menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), true)
-			PED.SET_PED_INTO_VEHICLE(my_ped, vehicle, -1)
+			menu.trigger_commands("vehicleneedscriptclone")
 			menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), veh_drive_state)
 		end
 	end
-	file:close()
 end)
 
 local clonagem_tab = menu.list(veiculo_tab, "Configurações de clonagem")
