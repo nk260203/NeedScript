@@ -86,7 +86,6 @@ local clonagem_tab = menu.list(veiculo_tab, "Configurações de clonagem")
 menu.toggle(clonagem_tab, "A pé, dirigir veículo clonado", { "" }, "Se você estiver a pé, instantaneamente será colocado no controle de veículos clonados", function(on)
 
     if on then
-		util.toast("true")
         dirigirveiculoape = true
     else
         dirigirveiculoape = false
