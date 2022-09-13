@@ -6,7 +6,7 @@ util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
 
-menu.divider(menu.my_root(), "NeedScript v1.0.1")
+menu.divider(menu.my_root(), "NeedScript v1.0.2")
 
 local auto_update_source_url = "https://raw.githubusercontent.com/nk260203/NeedScript/main/NeedScript.lua"
 local status, lib = pcall(require, "auto-updater")
@@ -57,14 +57,14 @@ local tipodeplaca
 local platetype
 menu.action(veiculo_tab, "Clonar veículo", {"clone"}, "Clona seu atual ou último veículo", function()
 
+    local vehicle = entities.get_user_vehicle_as_handle()
+	local ped = PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(pid)
+	local player_veh = PED.GET_VEHICLE_PED_IS_USING(ped)
+
 	foot_drive_state = menu.get_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"))
 	veh_drive_state = menu.get_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"))
 	
 	menu.trigger_commands("savevehicle needscriptclone")
-	
-	if platetype then
-		VEHICLE.SET_VEHICLE_NUMBER_PLATE_TEXT(vehicle, randomString(8))
-	end
 	
 	if not PED.IS_PED_IN_VEHICLE(ped, player_veh, false) then 
 		if dirigirveiculoape then
@@ -73,12 +73,16 @@ menu.action(veiculo_tab, "Clonar veículo", {"clone"}, "Clona seu atual ou últi
 			menu.set_value(menu.ref_by_path("Vehicle>Spawner>On Foot Behaviour>Drive Spawned Vehicles"), foot_drive_state)
 		end
 	else 
-		if dirigirveiculoemveiculo then
-			menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), true)
-			menu.trigger_commands("vehicleneedscriptclone")
-			menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), veh_drive_state)
-		end
+		menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), true)
+		menu.trigger_commands("vehicleneedscriptclone")
+		menu.set_value(menu.ref_by_path("Vehicle>Spawner>In Vehicle Behaviour>Drive Spawned Vehicles"), veh_drive_state)
 	end
+	
+	if platetype then
+		local vehicle = entities.get_user_vehicle_as_handle()
+		VEHICLE.SET_VEHICLE_NUMBER_PLATE_TEXT(vehicle, randomString(8))
+	end
+	
 end)
 
 local clonagem_tab = menu.list(veiculo_tab, "Configurações de clonagem")
@@ -89,16 +93,6 @@ menu.toggle(clonagem_tab, "A pé, dirigir veículo clonado", { "" }, "Se você e
         dirigirveiculoape = true
     else
         dirigirveiculoape = false
-    end
-	
-end)
-
-menu.toggle(clonagem_tab, "Em veículo, dirigir veículo clonado", { "" }, "Se você estiver em um veículo, instantaneamente será colocado no controle de veículos clonados", function(on)
-
-    if on then
-        dirigirveiculoemveiculo = true
-    else
-        dirigirveiculoemveiculo = false
     end
 	
 end)
