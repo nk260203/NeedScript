@@ -13,13 +13,13 @@ menu.divider(menu.my_root(), "NeedScript v1.2")
  
 local response = false
 local localVer = 1.2
-async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/blob/main/NeedScriptVersion", function(output)
+async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
     if localVer ~= currentVer then
         util.toast("Uma nova versão do NeedScript está disponível, atualize o lua para ter a versão mais recente.")
         menu.action(menu.my_root(), "Atualizar Lua", {}, "", function()
-            async_http.init('raw.githubusercontent.com','/nk260203/NeedScript/blob/main/NeedScript.lua',function(a)
+            async_http.init('raw.githubusercontent.com','/nk260203/NeedScript/main/NeedScript.lua',function(a)
                 local err = select(2,load(a))
                 if err then
                     util.toast("Falha no download do script. Por favor, tente novamente mais tarde. Se isso continuar acontecendo, atualize manualmente via github.")
