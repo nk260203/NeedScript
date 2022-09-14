@@ -10,7 +10,7 @@ util.require_natives("natives-1660775568-uno")
 util.toast("Obrigado por usar o NeedScript")
  
 local response = false
-local localVer = 1.1
+local localVer = 1.2
 async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/blob/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
