@@ -1,3 +1,4 @@
+util.require_natives("natives-1660775568-uno")
 -- NeedScript
 util.keep_running()
 
@@ -5,7 +6,6 @@ util.require_natives(1651208000)
 util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
-util.require_natives("natives-1660775568-uno")
 
 util.toast("Obrigado por usar NeedScript =)")
 
