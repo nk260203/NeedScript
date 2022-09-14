@@ -7,7 +7,7 @@ util.require_natives(1640181023)
 util.require_natives(1660775568)
 util.require_natives("natives-1660775568-uno")
 
-util.toast("Obrigado por usar o NeedScript")
+util.toast("Obrigado por usar NeedScript =)")
  
 local response = false
 local localVer = 1.2
