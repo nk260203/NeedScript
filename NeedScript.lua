@@ -5,23 +5,33 @@ util.require_natives(1651208000)
 util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
+util.require_natives("natives-1660775568-uno")
 
-menu.divider(menu.my_root(), "NeedScript v1.0.4")
-
-local auto_update_source_url = "https://raw.githubusercontent.com/nk260203/NeedScript/main/NeedScript.lua"
-local status, lib = pcall(require, "auto-updater")
-if not status then
-    async_http.init("raw.githubusercontent.com", "/hexarobi/stand-lua-auto-updater/main/auto-updater.lua",
-        function(result, headers, status_code) local error_prefix = "Error downloading auto-updater: "
-            if status_code ~= 200 then util.toast(error_prefix..status_code) return false end
-            if not result or result == "" then util.toast(error_prefix.."Found empty file.") return false end
-            local file = io.open(filesystem.scripts_dir() .. "lib\\auto-updater.lua", "wb")
-            if file == nil then util.toast(error_prefix.."Could not open file for writing.") return false end
-            file:write(result) file:close() util.toast("Successfully installed auto-updater lib")
-        end, function() util.toast("Error downloading auto-updater lib. Update failed to download.") end)
-    async_http.dispatch() util.yield(3000) require("auto-updater")
-end
-run_auto_update({source_url=auto_update_source_url, script_relpath=SCRIPT_RELPATH})
+util.toast("Obrigado por usar o NeedScript")
+ 
+local response = false
+local localVer = 1.1
+async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/blob/main/NeedScriptVersion", function(output)
+    currentVer = tonumber(output)
+    response = true
+    if localVer ~= currentVer then
+        util.toast("Uma nova versão do NeedScript está disponível, atualize o lua para ter a versão mais recente.")
+        menu.action(menu.my_root(), "Atualizar Lua", {}, "", function()
+            async_http.init('raw.githubusercontent.com','/nk260203/NeedScript/blob/main/NeedScript.lua',function(a)
+                local err = select(2,load(a))
+                if err then
+                    util.toast("Falha no download do script. Por favor, tente novamente mais tarde. Se isso continuar acontecendo, atualize manualmente via github.")
+                return end
+                local f = io.open(filesystem.scripts_dir()..SCRIPT_RELPATH, "wb")
+                f:write(a)
+                f:close()
+                util.toast("NeedScript atualizado com sucesso, reinicie o script! :)")
+                util.stop_script()
+            end)
+            async_http.dispatch()
+        end)
+    end
+end, function() response = true end)
 
 local json = require("json")
 local vehiclelib = require("jackzvehiclelib")
