@@ -8,6 +8,8 @@ util.require_natives(1660775568)
 util.require_natives("natives-1660775568-uno")
 
 util.toast("Obrigado por usar NeedScript =)")
+
+menu.divider(menu.my_root(), "NeedScript v1.2")
  
 local response = false
 local localVer = 1.2
