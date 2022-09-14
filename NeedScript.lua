@@ -6,7 +6,7 @@ util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
 
-menu.divider(menu.my_root(), "NeedScript v1.0.3")
+menu.divider(menu.my_root(), "NeedScript v1.0.4")
 
 local auto_update_source_url = "https://raw.githubusercontent.com/nk260203/NeedScript/main/NeedScript.lua"
 local status, lib = pcall(require, "auto-updater")
