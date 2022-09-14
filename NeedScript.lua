@@ -1,4 +1,4 @@
--- MyScript
+-- NeedScript
 util.keep_running()
 
 util.require_natives(1651208000)
@@ -160,4 +160,3 @@ function _clear_ents(list, range, dryRun)
     end
     return count
 end
-
