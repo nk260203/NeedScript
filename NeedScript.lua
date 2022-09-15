@@ -12,7 +12,7 @@ util.toast("Obrigado por usar NeedScript =)")
 
 -- Procurar por atualizações
 local response = false
-local localVer = 1.6
+local localVer = 1.5
 async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
@@ -41,16 +41,16 @@ until response
 
 -- Criação de abas
 
-voce_root = menu.list(menu.my_root(), "Você", {""}, "Um simples menu com opções relacionadas a você")
+-- voce_root = menu.list(menu.my_root(), "Você", {""}, "Um simples menu com opções relacionadas a você")
 
-armas_root = menu.list(menu.my_root(), "Armas", {""}, "Um simples menu com opções relacionadas a armas")
+-- armas_root = menu.list(menu.my_root(), "Armas", {""}, "Um simples menu com opções relacionadas a armas")
 
 veiculo_root = menu.list(menu.my_root(), "Veículo", {""}, "Um simples menu com opções relacionadas a veículos")
 clonagem_root = menu.list(veiculo_root, "Configurações de clonagem", {""}, "Um menu com configurações de clonagem de veículos")
 
-online_root = menu.list(menu.my_root(), "Online", {""}, "Um simples menu com opções relacionadas ao online")
+-- online_root = menu.list(menu.my_root(), "Online", {""}, "Um simples menu com opções relacionadas ao online")
 
-mundo_root = menu.list(menu.my_root(), "Mundo", {""}, "Um simples menu com opções relacionadas ao mundo")
+-- mundo_root = menu.list(menu.my_root(), "Mundo", {""}, "Um simples menu com opções relacionadas ao mundo")
 
 utilidade_root = menu.list(menu.my_root(), "Utilidades", {""}, "Um simples menu com opções que podem ser útil")
 
@@ -174,37 +174,9 @@ menu.click_slider(utilidade_root, "Remover todos próximos", {""}, "Remove todos
 end)
 
 -- Aba de sobre
+local botao_atualizar
 menu.hyperlink(sobre_root, "GitHub", "https://github.com/nk260203/NeedScript")
-menu.readonly(sobre_root, "Versão atual", "v" .. localVer)
-menu.action(sobre_root, "Verificar atualizações", {"needscriptcheckupdate"}, "Verifica se existe alguma atualização pendente", function()
-	async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
-		currentVer = tonumber(output)
-		response = true
-		if localVer ~= currentVer then
-			util.toast("Uma nova versão do NeedScript está disponível, atualize o lua para ter a versão mais recente.")
-			menu.action(sobre_root, "Atualizar Lua (v" .. localVer .. " -> v" .. currentVer .. ")", {}, "", function()
-				async_http.init('raw.githubusercontent.com','/nk260203/NeedScript/main/NeedScript.lua',function(a)
-					local err = select(2,load(a))
-					if err then
-						util.toast("Falha no download do script. Por favor, tente novamente mais tarde. Se isso continuar acontecendo, atualize manualmente via github.")
-					return end
-					local f = io.open(filesystem.scripts_dir()..SCRIPT_RELPATH, "wb")
-					f:write(a)
-					f:close()
-					util.toast("NeedScript atualizado com sucesso, reinicie o script! :)")
-					util.stop_script()
-				end)
-				async_http.dispatch()
-			end)
-		else
-			util.toast("Nenhuma atualização foi encontrada")
-		end
-	end, function() response = true end)
-	async_http.dispatch()
-	repeat 
-		util.yield()
-	until response
-end)
+menu.readonly(sobre_root, "Versão do script instalado", "v" .. localVer)
 
 
 -- Fim
