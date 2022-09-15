@@ -8,7 +8,7 @@ util.toast("Obrigado por usar NeedScript =)")
  
 local response = false
 local localVer = 1.5
-async_http.init("raw.githubusercontent.com", "/Prisuhm/JinxScript/main/JinxScriptVersion", function(output)
+async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
     if localVer ~= currentVer then
