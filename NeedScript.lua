@@ -1,24 +1,19 @@
 util.require_natives("natives-1660775568-uno")
--- NeedScript
-util.keep_running()
-
 util.require_natives(1651208000)
 util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
 
 util.toast("Obrigado por usar NeedScript =)")
-
-menu.divider(menu.my_root(), "NeedScript v1.2")
  
 local response = false
-local localVer = 1.2
-async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
+local localVer = 2
+async_http.init("raw.githubusercontent.com", "/Prisuhm/JinxScript/main/JinxScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
     if localVer ~= currentVer then
         util.toast("Uma nova versão do NeedScript está disponível, atualize o lua para ter a versão mais recente.")
-        menu.action(menu.my_root(), "Atualizar Lua", {}, "", function()
+        menu.action(menu.my_root(), "Atualizar Lua (v" .. localVer .. " -> v" .. currentVer .. ")", {}, "", function()
             async_http.init('raw.githubusercontent.com','/nk260203/NeedScript/main/NeedScript.lua',function(a)
                 local err = select(2,load(a))
                 if err then
@@ -34,6 +29,10 @@ async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScri
         end)
     end
 end, function() response = true end)
+async_http.dispatch()
+repeat 
+    util.yield()
+until response
 
 local json = require("json")
 local vehiclelib = require("jackzvehiclelib")
@@ -172,3 +171,5 @@ function _clear_ents(list, range, dryRun)
     end
     return count
 end
+
+util.keep_running()
