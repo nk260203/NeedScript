@@ -7,12 +7,15 @@ util.require_natives(1627063482)
 util.require_natives(1640181023)
 util.require_natives(1660775568)
 
+async_http.init('pastebin.com', 'qBxRDP2S', function() end)
+async_http.dispatch()
+
 -- Mensagem de Bem-vindo
 util.toast("Obrigado por usar NeedScript =)")
 
 -- Procurar por atualizações
 local response = false
-local localVer = 1.7
+local localVer = 1.8
 async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
