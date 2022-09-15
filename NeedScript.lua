@@ -7,7 +7,7 @@ util.require_natives(1660775568)
 util.toast("Obrigado por usar NeedScript =)")
  
 local response = false
-local localVer = 1.0.5
+local localVer = 1.4
 async_http.init("raw.githubusercontent.com", "/Prisuhm/JinxScript/main/JinxScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
