@@ -12,7 +12,7 @@ util.toast("Obrigado por usar NeedScript =)")
 
 -- Procurar por atualizações
 local response = false
-local localVer = 1.6
+local localVer = 1.7
 async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
@@ -145,31 +145,31 @@ end)
 -- Aba de ultilidade
 menu.click_slider(utilidade_root, "Remover veículos próximos", {""}, "Remove todos os veículos próximos a você", 500, 100000, 500, 6000, function(range)
     local vehicles = entities.get_all_vehicles_as_handles()
-    local count = _clear_ents(vehicles, range)
+    local count = deletar_entidades(vehicles, range)
     util.toast(count .. " veículos removidos")
 end)
 
 menu.click_slider(utilidade_root, "Remover objetos próximos", {""}, "Remove todos os objetos próximos a você", 500, 100000, 500, 6000, function(range)
     local vehicles = entities.get_all_objects_as_handles()
-    local count = _clear_ents(vehicles, range)
+    local count = deletar_entidades(vehicles, range)
     util.toast(count .. " Objetos removidos")
 end)
 
 menu.click_slider(utilidade_root, "Remover pedestres próximos", {""}, "Remove todos os pedestres próximos a você", 500, 100000, 500, 6000, function(range)
     local vehicles = entities.get_all_peds_as_handles()
-    local count = _clear_ents(vehicles, range)
+    local count = deletar_entidades(vehicles, range)
     util.toast(count .. " Pedestres removidos")
 end)
 
 menu.click_slider(utilidade_root, "Remover todos próximos", {""}, "Remove todos os veículos, objetos e pedestres próximos a você", 500, 100000, 500, 6000, function(range)
 	local vehicles = entities.get_all_vehicles_as_handles()
-    local count = _clear_ents(vehicles, range)
+    local count = deletar_entidades(vehicles, range)
     util.toast(count .. " veículos removidos")
 		local vehicles = entities.get_all_objects_as_handles()
-    local count = _clear_ents(vehicles, range)
+    local count = deletar_entidades(vehicles, range)
     util.toast(count .. " Objetos removidos")
     local vehicles = entities.get_all_peds_as_handles()
-    local count = _clear_ents(vehicles, range)
+    local count = deletar_entidades(vehicles, range)
     util.toast(count .. " Pedestres removidos")
 end)
 
