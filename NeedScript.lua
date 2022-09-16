@@ -15,7 +15,7 @@ util.toast("Obrigado por usar NeedScript =)")
 
 -- Procurar por atualizações
 local response = false
-local localVer = 1.8
+local localVer = 1.9
 async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScriptVersion", function(output)
     currentVer = tonumber(output)
     response = true
@@ -31,7 +31,7 @@ async_http.init("raw.githubusercontent.com", "/nk260203/NeedScript/main/NeedScri
                 f:write(a)
                 f:close()
                 util.toast("NeedScript atualizado com sucesso, reinicie o script! :)")
-                util.stop_script()
+                util.restart_script()
             end)
             async_http.dispatch()
         end)
