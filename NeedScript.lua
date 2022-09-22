@@ -101,6 +101,7 @@ menu.toggle(clonagem_root, "A pé, dirigir veículo clonado", { "" }, "Se você 
     end
 end)
 
+local platetype
 menu.toggle(clonagem_root, "Placa aleatória", { "" }, "Se ativar isso seu carro usando uma placa aleatória", function(on)
     if on then
         platetype = true
@@ -111,7 +112,6 @@ end)
 
 -- Aba de veículos
 local dirigirveiculoape
-local platetype
 menu.action(veiculo_root, "Clonar veículo", {"clone"}, "Clona seu atual ou último veículo", function()
     local vehicle = entities.get_user_vehicle_as_handle()
 	local ped = PLAYER.GET_PLAYER_PED_SCRIPT_INDEX(pid)
